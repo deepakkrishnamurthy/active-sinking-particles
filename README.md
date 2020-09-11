@@ -1,4 +1,4 @@
-#Active sinking particles
+# Active sinking particles
 
 ## Repo for Active sinking particles project.
 ### Collaboration between Prakash Lab, Stanford and Pepper Lab, U of Puget Sound. 
