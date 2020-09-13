@@ -1,3 +1,12 @@
-﻿Organism,Condition,rootFolder,trackFolder,trackFile,Tmin,Tmax
-Agar sphere,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Trac4,track000.csv,0,500
-Agar sphere,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Track2,track000.csv,0,500
+﻿Organism,Condition,rootFolder,trackFolder,trackFile,Tmin,Tmax,Objective
+Sphere 001,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21,Track4,track000.csv,0,90,10x
+Sphere 001,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21,Track5,track000.csv,0,40,10x
+Sphere 002,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Track1,track000.csv,0,0,10x
+Sphere003,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Track2,track000.csv,0,1800,10x
+Sphere003,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Track3,track000.csv,0,0,10x
+Sphere003,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Track4,track000.csv,0,0,10x
+Sphere003,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Track7,track003.csv,0,0,10x
+Sphere003,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Track7,track004.csv,0,0,10x
+Sphere003,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Track8,track000.csv,0,0,4x
+Sphere003,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Track10,track000.csv,0,264,4x
+Sphere003,1,H:\2019 Monterey Trip\Vorticella_GM\2019_08_21_Afternoon,Track11,track000.csv,0,0,4x

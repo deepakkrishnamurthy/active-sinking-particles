@@ -42,10 +42,6 @@ class msdanalyzer:
             self.Organism = Organism
             self.Condition = Condition
             
-       
-        
-        
-        
         self.rootFolder = savePath
 
         self.figuresFolder = os.path.join(self.rootFolder, 'MSD_figures')
@@ -65,15 +61,15 @@ class msdanalyzer:
         if(not os.path.exists(self.velocityDistFolder)):
             os.makedirs(self.velocityDistFolder)
             
-        self.entropyFolder = os.path.join(self.rootFolder, 'MSE_calculation')
-
-        if(not os.path.exists(self.entropyFolder)):
-            os.makedirs(self.entropyFolder)
+#        self.entropyFolder = os.path.join(self.rootFolder, 'MSE_calculation')
+#
+#        if(not os.path.exists(self.entropyFolder)):
+#            os.makedirs(self.entropyFolder)
 
         # Path in which to save the resulting MSD trajectories
-        self.saveFile = self.Organism+'_'+self.Condition
+        self.saveFile = str(self.Organism)+'_'+str(self.Condition)
         # Create sub-folder for each condition
-        self.subFolder = self.Organism + '_' + self.Condition
+        self.subFolder = str(self.Organism) + '_' + str(self.Condition)
 
         # Path to the sub-folder which contains the trajectories
         self.savePath = os.path.join(self.rootFolder, self.subFolder)
@@ -89,6 +85,8 @@ class msdanalyzer:
         self.ensemble_method = ensemble_method
 
         if(self.testFlag == 1 and Tracks is None):
+            
+        
             self.maxDelay = 50
             self.timeWindow = 5
             # Length of the delays array for Sub-sampling of the trajectory and over which we calculate MSD
@@ -293,7 +291,6 @@ class msdanalyzer:
             Tracks[ii].ZobjWheel = X_array[2,ii,:]
 
             if(ii==1):
-                print(Tracks[ii].ZobjWheel)
                 plt.figure()
                 plt.plot(Tracks[ii].T, Tracks[ii].X,'k')
                 plt.show()
@@ -367,7 +364,7 @@ class msdanalyzer:
         self.tLen = int(self.maxDelay/float(self.minDiff))
         self.delays = np.linspace(0,self.maxDelay,self.tLen)
         self.delayIndex = np.array(range(0,len(self.delays)))
-        print(self.delays)
+#        print(self.delays)
         
     def DispAtCommonTimes(self):
         
@@ -535,8 +532,8 @@ class msdanalyzer:
 
                 # Save the Squared displacements for each trajectory
                 if(save is True):
-                    print('Saving trajectory {}'.format(counter))
-                    np.savez_compressed(os.path.join(self.savePath,self.Organism + '_'+self.Condition + '_' + "trajectories"+'{:04d}'.format(counter)), trajectories_x = SqDisp_X_subTrack, trajectories_y = SqDisp_Y_subTrack, trajectories_z = SqDisp_Z_subTrack, time = T_subTrack)
+#                    print('Saving trajectory {}'.format(counter))
+                    np.savez_compressed(os.path.join(self.savePath,self.Organism + '_'+str(self.Condition) + '_' + "trajectories"+'{:04d}'.format(counter)), trajectories_x = SqDisp_X_subTrack, trajectories_y = SqDisp_Y_subTrack, trajectories_z = SqDisp_Z_subTrack, time = T_subTrack)
 
 
                 startIndex += next((i for i,x in enumerate(TimeArray[startIndex:] - TimeArray[startIndex]) if x >= self.timeWindow), None)
@@ -595,21 +592,7 @@ class msdanalyzer:
     #        plt.axis('image')
     #        plt.show()
                 
-    #         Weights = np.sum(SD_matrix_X!=0, axis = 0)
-    #         Weights[0] = nSubTracks
 
-    #         np.shape(Weights)
-            
-    #         plt.figure()
-    #         plt.plot(self.delays, Weights, color = 'r')
-    #         plt.show()
-    # #        
-    # #        print(np.shape(Weights))
-    # #        print(np.shape(MSD_matrix_X))
-            
-            # SD_matrix_X[SD_matrix_X==0] = np.nan
-            # SD_matrix_Y[SD_matrix_Y==0] = np.nan
-            # SD_matrix_Z[SD_matrix_Z==0] = np.nan
             
             
             
@@ -858,7 +841,7 @@ class msdanalyzer:
             if file.endswith(".npz"):
                 Traj_X.append([])
                 Traj_Z.append([])
-                print('Loading trajectory : {}'.format(file))
+#                print('Loading trajectory : {}'.format(file))
                 data = np.load(os.path.join(self.savePath, file))
                 Time = data['time'] - data['time'][0]
 
@@ -866,12 +849,14 @@ class msdanalyzer:
                 if(counter==0):
                     TimeArray.append(Time)
                     
-                print(len(data['trajectories_x']))
+#                print(len(data['trajectories_x']))
                 Traj_X[counter].append(data['trajectories_x'])
                 Traj_Z[counter].append(data['trajectories_z'])
-
+                
+                
                 counter += 1
-
+        
+        print(Traj_X)
         TimeArray = np.squeeze(np.array(TimeArray))
         Traj_X = np.squeeze(np.array(np.stack(Traj_X, axis = 0)))
         Traj_Z = np.squeeze(np.array(np.stack(Traj_Z, axis = 0)))
@@ -882,7 +867,7 @@ class msdanalyzer:
         # Max time over which to calculate the fit for the X-axis trajectory
         Time, Traj = np.array(Time), np.array(Traj)
 
-        print(Time)
+#        print(Time)
 
         print(np.shape(Time))
         print(np.shape(Traj))
@@ -976,8 +961,8 @@ class msdanalyzer:
             Traj_X, Traj_Z = Traj_X[:,1:], Traj_Z[:,1:]
 
             shape = np.shape(Traj_X)
-            print(shape)
-            print(Traj_X)
+#            print(shape)
+#            print(Traj_X)
             assert(shape[1]>1)
             # Truncate the X trajectory over a shorter time, since it typically decorrelates faster
             print(len(Time))
@@ -1142,7 +1127,7 @@ class msdanalyzer:
     def calculate_velocityDist(self):
         
         
-        saveFile = self.saveFile + '_' + '_VelocityTimeSeries.csv'
+        saveFile = self.saveFile + '_' + '_VelocityTimeSeries'
 
         
         overwrite = False
@@ -1199,7 +1184,7 @@ class msdanalyzer:
 
                 dataFrame_full = dataFrame_full.append(pd.DataFrame({'Organism':np.repeat(self.Organism,dataLen,axis = 0),'Condition':np.repeat(self.Condition,dataLen,axis=0), 'Track': np.repeat(currTrack.path ,dataLen,axis=0) , 'VelocityX':Velocities_X,'VelocityY':Velocities_Y,'VelocityZ':Velocities_Z}))
 
-                dataFrame_full.to_csv(os.path.join(self.velocityDistFolder, saveFile + currTrack.trackName))
+                dataFrame_full.to_csv(os.path.join(self.velocityDistFolder, saveFile + currTrack.trackName + '.csv'))
 
             self.Vz_variability_mean = np.nanmean(Vz_std/Vz_mean)
 
@@ -1326,7 +1311,7 @@ class msdanalyzer:
         
         print('Calculating MSE for tracks ...')
         
-        saveFile = self.Organism + '_' + self.Condition + '_' + 'MSE.csv'
+        saveFile = self.Organism + '_' + str(self.Condition) + '_' + 'MSE.csv'
         
         savePath = os.path.join(self.entropyFolder, saveFile)
         
@@ -1401,8 +1386,8 @@ class msdanalyzer:
             
             df_mse.to_csv(savePath)
             
-            plt.savefig(self.Organism + '_' + self.Condition + '_MSE.png', dpi = 150)
-            plt.savefig(self.Organism + '_' + self.Condition + '_MSE.svg', dpi = 150)
+            plt.savefig(self.Organism + '_' + str(self.Condition) + '_MSE.png', dpi = 150)
+            plt.savefig(self.Organism + '_' + str(self.Condition) + '_MSE.svg', dpi = 150)
 
 
 #------------------------------------------------------------------------------
@@ -1411,7 +1396,7 @@ class msdanalyzer:
     def plot_signal_entropy(self, time, signal, scale_factors, mse, axes, label = None):
         
         if(label is None):
-            label = self.Organism + '_' + self.Condition
+            label = self.Organism + '_' + str(self.Condition)
     
         if(axes is None):
             fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(16,12))
@@ -1425,7 +1410,7 @@ class msdanalyzer:
         axes[1].set_xlabel('Scale factor')
         axes[1].set_ylabel('MSE')
         
-        plt.title(self.Organism + '_' + self.Condition)
+        plt.title(self.Organism + '_' + str(self.Condition))
         plt.legend()
        
         
@@ -1468,7 +1453,7 @@ class msdanalyzer:
 
             my_pal = {'VelocityZ': 'b' ,'VelocityX': 'r'}
 
-            plt.savefig(self.Organism+'_'+self.Condition+'.svg', dpi = 150)
+            plt.savefig(self.Organism+'_'+str(self.Condition)+'.svg', dpi = 150)
         
                 
     def plotMSD(self, figname = 1, plot_analytical = False, plot_fit = False, savefig = False):
@@ -1500,7 +1485,7 @@ class msdanalyzer:
             else:
                 ax0.plot(self.delays, self.f(self.delays, self.params_Z), 'k-', label = 'Z - WLS-ICE Fit (Taylor equation)')
 
-        plt.title(self.Organism + '_' + self.Condition)
+        plt.title(self.Organism + '_' + str(self.Condition))
 
         if(savefig is True):
             plt.savefig(os.path.join(self.figuresFolder,self.saveFile+'_MSD_Linear.svg'),bbox_inches='tight',dpi=150)
@@ -1546,7 +1531,7 @@ class msdanalyzer:
         plt.legend(loc='upper left', frameon=False)
     
 
-        plt.title(self.Organism + '_' + self.Condition)
+        plt.title(self.Organism + '_' + str(self.Condition))
 
         if(savefig is True):
             plt.savefig(os.path.join(self.figuresFolder,self.saveFile+'_MSD_Log.svg'),bbox_inches='tight',dpi=150)
@@ -1562,7 +1547,7 @@ class msdanalyzer:
         plt.ylim(0,2.5)
         plt.xlabel('Time (s)')
         plt.ylabel('Local slope of MSD curve')
-        plt.title(self.Organism + '_' + self.Condition)
+        plt.title(self.Organism + '_' + str(self.Condition))
 
         plt.legend(loc='best', frameon=False)
 

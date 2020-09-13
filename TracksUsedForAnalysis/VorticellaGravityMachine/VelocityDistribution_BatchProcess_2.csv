@@ -1,0 +1,14 @@
+﻿Organism,Condition,rootFolder,trackFolder,trackFile,Tmin,Tmax,Objective
+Sphere004,0,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,track1,track000.csv,0,0,10x
+Sphere004,0,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,Track2,track000.csv,0,0,10x
+Sphere005,0,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,Track3,track000.csv,0,0,4x
+Sphere005,0,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,Track4,track000.csv,0,0,4x
+Sphere006,3,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,Track5,track000.csv,0,0,4x
+Sphere006,3,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,Track6,track000.csv,0,0,4x
+Sphere006,3,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,track7,track000.csv,0,0,10x
+Sphere006,3,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,track7,track001.csv,0,0,10x
+Sphere006,3,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,track7,track002.csv,0,0,10x
+Sphere006,3,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,track8,track000.csv,0,0,4x
+Sphere006,3,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,track9,track000.csv,0,0,4x
+Sphere007,7,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,track10,track000.csv,0,0,4x
+Sphere006,3,H:\2019 Monterey Trip\Vorticella_GM\2019_08_22,track12,track000.csv,0,0,4x

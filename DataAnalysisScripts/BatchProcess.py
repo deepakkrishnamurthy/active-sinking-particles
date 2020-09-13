@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os, time
 
-batch_file = "C:/Users/Deepak/Dropbox/GravityMachine/GravityMachineAnalysis_Scripts/BatchProcessFiles/BoatWobbleAnalysis_PIV.csv"
+batch_file = 'D:/Vorticella_GravityMachine/active-sinking-particles/TracksUsedForAnalysis/VorticellaGravityMachine/VelocityDistribution_BatchProcess.csv'
 
 df_batch = pd.read_csv(batch_file)
 
@@ -32,13 +32,14 @@ for ii in range(len(df_batch)):
     
     FileName = os.path.join(rootFolder, trackFolder, trackFile)
     
-    Organism = df_batch['Organism'][ii]
+    track_ID = df_batch['ID'][ii]
     Condition = df_batch['Condition'][ii]
     
-    Description = df_batch['Description'][ii]
    
     
     LocalTime = time.ctime(os.path.getmtime(FileName))
+    
+    PixelPermm = df_batch['Pixelpermm'][ii]
     
     
 
@@ -48,8 +49,7 @@ for ii in range(len(df_batch)):
     print(FileName)
     print(Organism)
     print(Condition)
-    track = GravityMachineTrack.gravMachineTrack(trackFile = FileName, organism = Organism, condition = Condition, trackDescription = Description, Tmin = Tmin, Tmax = Tmax, computeDisp = True, overwrite_piv = False, overwrite_velocity = False, findDims = True, localTime = LocalTime, flip_z = False, pixelPermm = 1122.67, scaleFactor = 5)
-#
+    track = GravityMachineTrack.gravMachineTrack(trackFile = FileName, organism = track_ID, condition = Condition, trackDescription = Description, Tmin = Tmin, Tmax = Tmax, computeDisp = True, overwrite_piv = False, overwrite_velocity = False, findDims = True, localTime = LocalTime, flip_z = False, pixelPermm = 1122.67, scaleFactor = 5)
     track.saveAnalysisData(overwrite = True)
 
 #FileList = {}

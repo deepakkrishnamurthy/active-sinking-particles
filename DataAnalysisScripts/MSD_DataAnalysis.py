@@ -17,7 +17,7 @@ imp.reload(msdanalyzer)
 import matplotlib.pyplot as plt
 # %matplotlib inline
 
-    
+PixelPermm = {'4x':449, '10x':1122}
 #------------------------------------------------------------------------------------------------------------------------------    
 # Define some constants for the data analysis:
 
@@ -26,19 +26,24 @@ minTrackDuration = 30
     
     
 # Folder in which to save analysis results
-saveFolder = 'C:/Users/deepak/Dropbox/GravityMachine/ExperimentResults/MSD_Analysis'
+saveFolder = 'C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/TrackAnalysis_results/MSD_analysis'
     
 #analysis_file = 'C:/Users/deepak/Dropbox/GravityMachine/GravityMachineAnalysis_Scripts/Acantharia.csv'
 
 #analysis_file = 'C:/Users/Deepak/Dropbox/GravityMachine/GravityMachineAnalysis_Scripts/TracksUsedForAnalysis/MSD_VelocityDistrib_TracksUsed/Acantharia.csv'
 
-analysis_file = 'C:/Users/Deepak/Dropbox/GravityMachine/GravityMachineAnalysis_Scripts/TracksUsedForAnalysis/MSD_VelocityDistrib_TracksUsed/CeratiumSp_noFork.csv'
+#analysis_file = 'C:/Users/Deepak/Dropbox/GravityMachine/GravityMachineAnalysis_Scripts/TracksUsedForAnalysis/MSD_VelocityDistrib_TracksUsed/CeratiumSp_noFork.csv'
+
+#analysis_file = 'D:/Vorticella_GravityMachine/active-sinking-particles/TracksUsedForAnalysis/VorticellaGravityMachine/VelocityDistribution_BatchProcess.csv'
+
+analysis_file = 'D:/Vorticella_GravityMachine/active-sinking-particles/TracksUsedForAnalysis/VorticellaGravityMachine/VelocityDistribution_BatchProcess_3.csv'
 
 analysis_df = pd.read_csv(analysis_file)
 
 
-pairwise_conditions = [(x,y) for x in analysis_df['Organism'] for y in analysis_df['Condition']]
+#pairwise_conditions = [(x,y) for x in analysis_df['Organism'] for y in analysis_df['Condition']]
 
+pairwise_conditions = [(analysis_df['Organism'][ii], analysis_df['Condition'][ii]) for ii in range(len(analysis_df))]
 
 # Create unique pairs between the Organism and Condition columns
 used = set()
@@ -66,6 +71,7 @@ for ii in range(nUniqueConditions):
     bool_Org = analysis_df['Organism'] == curr_Organism
     bool_Cond = analysis_df['Condition'] == curr_Condition
     
+ 
     
     # Check if the analysis data is already present on disk for this Organism, Condition
     if(overwrite is True or not os.path.exists(os.path.join(saveFolder, curr_Organism+'_'+curr_Condition+'_MSD.csv')) or not os.path.exists(os.path.join(saveFolder, curr_Organism+'_'+curr_Condition))):
@@ -74,16 +80,27 @@ for ii in range(nUniqueConditions):
         
         nTracksSameCondition = len(tracks_sameCondition)
         
+        print('No of tracks with same condition: {}'.format(nTracksSameCondition))
+        
+        # Reset the track array: We only want to bin tracks from the same unique condition together
+        TrackArray = []
+        
         for jj in range(nTracksSameCondition):
             
             Track_df = tracks_sameCondition.iloc[jj]
             
             
+            Objective = Track_df['Objective']
+            
+            
+            assert(Objective in PixelPermm.keys())
+            print('Pixel per mm: {}'.format(PixelPermm[Objective]))
+            
             full_path = os.path.join(Track_df['rootFolder'],Track_df['trackFolder'], Track_df['trackFile'])
             
             print('Loading {}'.format(full_path))
             
-            track = GravityMachineTrack.gravMachineTrack(trackFile = full_path , organism = Track_df['Organism'], condition = Track_df['Condition'], Tmin = Track_df['Tmin'], Tmax = Track_df['Tmax'], findDims = True, pixelPermm = None, use_postprocessed = False)
+            track = GravityMachineTrack.gravMachineTrack(trackFile = full_path , organism = Track_df['Organism'], condition = Track_df['Condition'], Tmin = Track_df['Tmin'], Tmax = Track_df['Tmax'], findDims = True, pixelPermm = PixelPermm[Objective], use_postprocessed = False)
             
                     
             # Filter tracks based on min Track Duration
@@ -94,9 +111,6 @@ for ii in range(nUniqueConditions):
     
     
         msd1 = msdanalyzer.msdanalyzer(Tracks = TrackArray, ensemble_method = 'subtrack', Organism = curr_Organism, Condition = curr_Condition, savePath = saveFolder)
-
-
-    #    msd1 = msdanalyzer(testFlag=0)
     
         msd1.computeSqDisp(save = True)
         msd1.computeMSD(save = True, overwrite = False)
@@ -111,15 +125,14 @@ for ii in range(nUniqueConditions):
 #        msd1.computeSqDisp(save = False, load = True)
         msd1.computeMSD(save = True, overwrite = False)
 
-# Non-linear least-squares fitting Including Correlated Error
+    # Non-linear least-squares fitting Including Correlated Error
 
-#msd1.fitTrajectories(overwrite = True)
+    msd1.fitTrajectories(overwrite = True)
 
-# MSD plots
+    # MSD plots
 
-#msd1.plotMSD(figname = 1, plot_fit= True, savefig = True)
+    msd1.plotMSD(figname = 1, plot_fit= True, savefig = True)
 
-#msd1.plotLocalSlope(savefig = True)
         
         
     
