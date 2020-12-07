@@ -145,4 +145,37 @@ plt.savefig(os.path.join(figures_folder, title+'_StokesLawFit.svg'), dpi =300)
 plt.show()
 
 
+#title = 'Peclet number of model aggregates'
+#
+#plt.figure(figsize=(16,12))
+#
+#
+#for ii in range(len(data)):
+#    print(ii)
+#    Organism = data['Organism'][ii]
+#    Condition = data['Condition'][ii]
+#    
+#    
+#    print(Organism)
+#    print(Condition)
+#    plt.errorbar(1000*data['OrgSize_mean'][ii], 1000*data['v_Z'][ii], xerr = 1000*data['OrgSize_std'][ii], yerr = 1000*data['sigma_v_Z'][ii], color = ColorStyle[Condition], marker = MarkerStyle[Condition], MarkerSize = 20, label = Condition, capsize = 5, linewidth=2, elinewidth=2, alpha=0.95, markeredgecolor = 'k')
+#    plt.annotate(Organism,(1000*data['OrgSize_mean'][ii],1000*data['v_Z'][ii]), textcoords="offset points", xytext=(20,20), ha='center', fontsize=12)
+#
+#plt.plot(1e6*Size_array, 1e6*TheoreticalSinkingSpeed, 'k-', linestyle='--')
+#plt.xlabel('Sphere diameter (um)')
+#plt.ylabel('Sinking speed (um/s)')
+#plt.title(title)
+#    
+#from collections import OrderedDict
+#
+#handles, labels = plt.gca().get_legend_handles_labels()
+#by_label = OrderedDict(zip(labels, handles))
+#plt.legend(by_label.values(), by_label.keys())
+##plt.legend(loc=2,prop={'size': 30})
+#plt.savefig(os.path.join(figures_folder, title+'_StokesLawFit.png'), dpi =300)
+#plt.savefig(os.path.join(figures_folder, title+'_StokesLawFit.svg'), dpi =300)
+#
+#
+#plt.show()
+
 

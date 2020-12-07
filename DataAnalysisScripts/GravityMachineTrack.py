@@ -631,6 +631,9 @@ class gravMachineTrack:
             self.OrgMajDim = size_df['OrgMajDim'][0]
             self.OrgMinDim = size_df['OrgMinDim'][0]
             
+            self.Organism = size_df['Organism']
+            
+            
         print('*'*50)
         print('Organism dimension {} mm'.format(self.OrgDim))
         print('Organism Major dimension {} mm'.format(self.OrgMajDim))

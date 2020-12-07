@@ -9,6 +9,6 @@ Created on Mon Aug 12 15:33:28 2019
 from flowtrace import flowtrace
 import os
 
-videoFolder = '/Volumes/My Book/2019 Monterey Trip/Tunicates/LarvaeReleaseImaging/2019_08_10/images'
+videoFolder = 'D:/Vorticella_GravityMachine/Flowtrace_analysis/2019_08_22_Track10'
 saveFolder = os.path.join(videoFolder, 'FlowTrace/')
 flowtrace(videoFolder,30,saveFolder)
