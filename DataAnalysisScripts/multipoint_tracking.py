@@ -339,21 +339,22 @@ while True and counter < nFrames-1:
         cv2.imwrite(os.path.join(image_save_path, '{:05d}'.format(counter) + '.tif'), image)
     counter += 1
     
-cv2.destroyAllWindows()
-# Store the point ID, position in memory/write it to file...
 
-# Store the track_ID (or point ID), position and time-stamps
-
-data = {track:pd.DataFrame({'track ID':[], 'Time':[], 'centroid X':[], 'centroid Z':[], 'sphere centroid X':[], 'sphere centroid Z':[]}) for track in track_ids}
+    # Store the point ID, position in memory/write it to file...
+    
+    # Store the track_ID (or point ID), position and time-stamps
+    
+data = pd.DataFrame({'feature ID':[], 'Time':[], 'feature centroid X':[], 'feature centroid Z':[], 'sphere centroid X':[], 'sphere centroid Z':[]})
 
 for ii in track_ids:
-    data[ii] = data[ii].append(pd.DataFrame({'track ID':np.repeat(ii, len(centroids_x_array[ii]), axis = 0), 'Time': Timestamp_array, 'centroid X':centroids_x_array[ii], 'centroid Z':centroids_y_array[ii], 'sphere centroid X': true_centroid_sphere_X_array, 'sphere centroid Z':true_centroid_sphere_Z_array }))
+    data = data.append(pd.DataFrame({'feature ID':np.repeat(ii, len(centroids_x_array[ii]), axis = 0), 'Time': Timestamp_array, 'feature centroid X':centroids_x_array[ii], 'feature centroid Z':centroids_y_array[ii], 'sphere centroid X': true_centroid_sphere_X_array, 'sphere centroid Z':true_centroid_sphere_Z_array }))
 
-    if(save):
-        data[ii].to_csv(os.path.join(save_path, save_file_name+'_'+str(ii)+'.csv'))
     
+if(save):
+    data.to_csv(os.path.join(save_path, save_file_name +'.csv'))
+
             
-                
+cv2.destroyAllWindows()
 
 # Calculate the instantaneous velocity of the points
 velocity_x = {}
