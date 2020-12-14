@@ -31,7 +31,7 @@ tracker_type_feature = 'CSRT'
 # @@@ Implement support for daSiamRPN based trackers.
 
 # Tracking parameters
-n_points = 5    # No:of points tracked at a given time.
+n_points = 7    # No:of points tracked at a given time.
 
 track_ids = [ii for ii in range(n_points)]
 
@@ -216,7 +216,7 @@ for ii in track_ids:
 
 # In a while loop try to track the n_points in subsequent frames
 counter = 0
-while True and counter < int(nFrames/2):
+while True and counter < int(nFrames/4):
     
     if(TEST == True):
         image_name = image_files[counter]
