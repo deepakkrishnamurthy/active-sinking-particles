@@ -31,7 +31,7 @@ tracker_type_feature = 'CSRT'
 # @@@ Implement support for daSiamRPN based trackers.
 
 # Tracking parameters
-n_points = 7    # No:of points tracked at a given time.
+n_points = 3    # No:of points tracked at a given time.
 
 track_ids = [ii for ii in range(n_points)]
 
@@ -139,7 +139,7 @@ save_image = False
 
 
 if(TEST == True):
-    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images_2020-12-10 23-38'
+    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images'
     image_files = [file_name for file_name in os.listdir(test_images_folder) if file_name.endswith('.tif')]
     print(image_files)
     
