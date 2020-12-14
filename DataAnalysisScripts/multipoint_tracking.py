@@ -31,7 +31,7 @@ tracker_type_feature = 'CSRT'
 # @@@ Implement support for daSiamRPN based trackers.
 
 # Tracking parameters
-n_points = 3    # No:of points tracked at a given time.
+n_points = 5    # No:of points tracked at a given time.
 
 track_ids = [ii for ii in range(n_points)]
 
@@ -139,7 +139,7 @@ save_image = False
 
 
 if(TEST == True):
-    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images_2020-12-08 01-41'
+    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images_2020-12-10 23-38'
     image_files = [file_name for file_name in os.listdir(test_images_folder) if file_name.endswith('.tif')]
     print(image_files)
     
@@ -216,7 +216,7 @@ for ii in track_ids:
 
 # In a while loop try to track the n_points in subsequent frames
 counter = 0
-while True and counter < nFrames-1:
+while True and counter < int(nFrames/2):
     
     if(TEST == True):
         image_name = image_files[counter]
@@ -373,6 +373,9 @@ for ii in track_ids:
     plt.scatter(x_centroids[:-1], y_centroids[:-1], c = speed[ii])
     
 
+plt.xlabel('X pos')
+plt.ylabel('Z pos')
+plt.axis('equal')
 plt.show()
 
 
