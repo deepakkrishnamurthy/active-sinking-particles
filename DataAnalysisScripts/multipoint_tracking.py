@@ -108,11 +108,10 @@ tracker_sphere_flag = None
 #T_start = 40
 #T_end = 70
     
-#track_file = 'H:/2019 Monterey Trip/Vorticella_GM/2019_08_22_afterdinner/track7/track000.csv'
-#sphere = 'Sphere012'
-
-#T_start = 180
-#T_end = 210
+track_file = 'H:/2019 Monterey Trip/Vorticella_GM/2019_08_22_afterdinner/track7/track000.csv'
+sphere = 'Sphere012'
+T_start = 180
+T_end = 210
 
 # 3 vorticella
 
@@ -122,10 +121,10 @@ tracker_sphere_flag = None
 #T_end = 240
 
 # 7 vorticella
-track_file = 'H:/2019 Monterey Trip/Vorticella_GM/2019_08_22/track10/track000.csv'
-sphere = 'Sphere007'
-T_start = 65
-T_end = 95
+#track_file = 'H:/2019 Monterey Trip/Vorticella_GM/2019_08_22/track10/track000.csv'
+#sphere = 'Sphere007'
+#T_start = 65
+#T_end = 95
 
 
 save_folder = 'RotationAnalysisTracks'
@@ -150,8 +149,9 @@ if(TEST == True):
     true_centroid_sphere_X, true_centroid_sphere_Z = 320, 320
 else:
     track = GravityMachineTrack.gravMachineTrack(trackFile = track_file, Tmin = T_start, Tmax = T_end, findDims = True, flip_z = False, scaleFactor = 5)
-    save_file_name = sphere + 'RotationTracks_Tmin_{}_Tmax_{}'.format(T_start, T_end)
-    image_save_path = os.path.join('D:/Vorticella_GravityMachine/SphereRotation_analysis', save_file_name)
+    save_file_name = sphere + 'RotationTrack_Tmin_{}_Tmax_{}'.format(T_start, T_end)
+    path = 'D:/Vorticella_GravityMachine/SphereRotation_analysis'
+    image_save_path = os.path.join(path, save_file_name)
 
     if(not os.path.exists(image_save_path)):
         os.makedirs(image_save_path)
@@ -166,7 +166,7 @@ else:
 
     print("No:of frames in track: {}".format(nFrames))
     
-    true_centroid_sphere_X, true_centroid_sphere_Z = 417, 211
+    true_centroid_sphere_X, true_centroid_sphere_Z = 1080, 463
 
 #    true_centroid_sphere_X, true_centroid_sphere_Z = df_sphere['centroid X'][0], df_sphere['centroid Z'][0]
 
@@ -174,7 +174,7 @@ else:
 if(TEST == True):
     save_path = os.path.join(test_images_folder, save_folder)
 else:
-    save_path = os.path.join(track.path, save_folder)
+    save_path = os.path.join(path, sphere + '_' + save_folder)
 
 if(save):
     if(not os.path.exists(save_path)):
