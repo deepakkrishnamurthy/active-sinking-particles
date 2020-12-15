@@ -131,7 +131,7 @@ T_end = 95
 save_folder = 'RotationAnalysisTracks'
 
 # Tests: Using artificially generated test-images for testing the method
-TEST = True
+TEST = False
 overwrite =  True
 save = True
 save_image = False
@@ -139,7 +139,7 @@ save_image = False
 
 
 if(TEST == True):
-    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images2020-12-08 01-27'
+    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images_2020-12-08 01-35'
     image_files = [file_name for file_name in os.listdir(test_images_folder) if file_name.endswith('.tif')]
     print(image_files)
     
@@ -166,7 +166,8 @@ else:
 
     print("No:of frames in track: {}".format(nFrames))
     
-    
+    true_centroid_sphere_X, true_centroid_sphere_Z = 417, 211
+
 #    true_centroid_sphere_X, true_centroid_sphere_Z = df_sphere['centroid X'][0], df_sphere['centroid Z'][0]
 
         
@@ -216,7 +217,7 @@ for ii in track_ids:
 
 # In a while loop try to track the n_points in subsequent frames
 counter = 0
-while True and counter < int(nFrames/4):
+while True and counter < int(nFrames):
     
     if(TEST == True):
         image_name = image_files[counter]
