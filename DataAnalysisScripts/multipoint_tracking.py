@@ -132,14 +132,14 @@ save_folder = 'RotationAnalysisTracks'
 
 # Tests: Using artificially generated test-images for testing the method
 TEST = True
-overwrite =  False
+overwrite =  True
 save = True
 save_image = False
 
 
 
 if(TEST == True):
-    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images'
+    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images2020-12-08 01-27'
     image_files = [file_name for file_name in os.listdir(test_images_folder) if file_name.endswith('.tif')]
     print(image_files)
     
