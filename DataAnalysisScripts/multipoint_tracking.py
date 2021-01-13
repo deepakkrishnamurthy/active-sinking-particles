@@ -108,10 +108,10 @@ tracker_sphere_flag = None
 #T_start = 40
 #T_end = 70
     
-track_file = 'H:/2019 Monterey Trip/Vorticella_GM/2019_08_22_afterdinner/track7/track000.csv'
-sphere = 'Sphere012'
-T_start = 180
-T_end = 210
+#track_file = 'H:/2019 Monterey Trip/Vorticella_GM/2019_08_22_afterdinner/track7/track000.csv'
+#sphere = 'Sphere012'
+#T_start = 180
+#T_end = 210
 
 # 3 vorticella
 
@@ -121,24 +121,30 @@ T_end = 210
 #T_end = 240
 
 # 7 vorticella
-#track_file = 'H:/2019 Monterey Trip/Vorticella_GM/2019_08_22/track10/track000.csv'
-#sphere = 'Sphere007'
-#T_start = 65
-#T_end = 95
+track_file = 'H:/2019 Monterey Trip/Vorticella_GM/2019_08_22/track10/track000.csv'
+sphere = 'Sphere007'
+T_start = 65
+T_end = 95
 
 
-save_folder = 'RotationAnalysisTracks'
+#track_file = 'H:/2019 Monterey Trip/Vorticella_GM/2019_08_21_Afternoon/Track8/track000.csv'
+#sphere = 'Sphere003'
+#T_start = 0
+#T_end = 84.5
+
+
+save_folder = sphere + '_'+ 'RotationAnalysisTracks'
 
 # Tests: Using artificially generated test-images for testing the method
 TEST = False
 overwrite =  True
-save = True
+save = False
 save_image = False
 
 
 
 if(TEST == True):
-    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images_2020-12-08 01-35'
+    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images_2020-12-08 01-32'
     image_files = [file_name for file_name in os.listdir(test_images_folder) if file_name.endswith('.tif')]
     print(image_files)
     
@@ -147,11 +153,18 @@ if(TEST == True):
     save_file_name = 'RotationTrack'
     
     true_centroid_sphere_X, true_centroid_sphere_Z = 320, 320
+    
+    image_save_path = os.path.join(test_images_folder, 'images_tracked_features')
+    
+    if(save_image):
+        if(not os.path.exists(image_save_path)):
+            os.makedirs(image_save_path)
 else:
     track = GravityMachineTrack.gravMachineTrack(trackFile = track_file, Tmin = T_start, Tmax = T_end, findDims = True, flip_z = False, scaleFactor = 5)
+    
     save_file_name = sphere + 'RotationTrack_Tmin_{}_Tmax_{}'.format(T_start, T_end)
-    path = 'D:/Vorticella_GravityMachine/SphereRotation_analysis'
-    image_save_path = os.path.join(path, save_file_name)
+    path = 'C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis'
+    image_save_path = os.path.join(path, save_folder, save_file_name)
 
     if(not os.path.exists(image_save_path)):
         os.makedirs(image_save_path)
@@ -166,7 +179,7 @@ else:
 
     print("No:of frames in track: {}".format(nFrames))
     
-    true_centroid_sphere_X, true_centroid_sphere_Z = 1080, 463
+    true_centroid_sphere_X, true_centroid_sphere_Z = 1002, 441
 
 #    true_centroid_sphere_X, true_centroid_sphere_Z = df_sphere['centroid X'][0], df_sphere['centroid Z'][0]
 
@@ -226,7 +239,7 @@ while True and counter < int(nFrames):
     else:
         imageindex = image_index_subsampled[counter] 
         image_name = track.df['Image name'][imageindex]
-        TimeStamp = track.df['Time'][imageindex] - TimeStamp_start
+        TimeStamp = track.df['Time'][imageindex]
         image = cv2.imread(os.path.join(track.path, track.image_dict[image_name], image_name),0)
     
     
@@ -336,7 +349,7 @@ while True and counter < int(nFrames):
         continue
     
     
-    if(save_image and TEST==False):
+    if(save_image):
         cv2.imwrite(os.path.join(image_save_path, '{:05d}'.format(counter) + '.tif'), image)
     counter += 1
     
@@ -391,26 +404,30 @@ plt.show()
     
     
     
+# Overlay centroid locations and velocities on the image and save the overlaid images
+plt.figure()
+comet_tail_length = 50
+for ii, index in enumerate(image_index_subsampled):
+    image_name = track.df['Image name'][index]
+    TimeStamp = track.df['Time'][index]
+    
+    
+    image = cv2.imread(os.path.join(track.path, track.image_dict[image_name], image_name),0)
+    image = clahe.apply(image)
+    
+    plt.cla()
+    plt.imshow(image, cmap = 'gray')
+    start_index = max(0, ii - comet_tail_length)
+    for track_id in track_ids:
         
         
-    
-    
-    
-    # Overlay centrid locations and velocities on the image and save the overlaid images
-    
-#    for ii, index in enumerate(image_index_subsampled):
-#        imageindex = image_index_subsampled[counter] 
-#        image_name = track.df['Image name'][imageindex]
-#        TimeStamp = track.df['Time'][imageindex]
-#        
-#        
-#        image = cv2.imread(os.path.join(track.path, track.image_dict[image_name], image_name),0)
-#        image = clahe.apply(image)
-#        
-#        x_centroids, y_centroids = centroids_x_array[ii], centroids_y_array[ii]
-#    
-#        for jj in track_ids:
+        x_centroids, y_centroids = centroids_x_array[track_id][start_index:ii], centroids_y_array[track_id][start_index:ii]
+        
+        plt.scatter(x_centroids, y_centroids, 20, color ='y', marker = 'o')
+
             
+    plt.show()
+    plt.pause(0.001)
             
         
         
