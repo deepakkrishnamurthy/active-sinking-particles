@@ -36,7 +36,7 @@ saveFolder = 'C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggr
 
 #analysis_file = 'D:/Vorticella_GravityMachine/active-sinking-particles/TracksUsedForAnalysis/VorticellaGravityMachine/VelocityDistribution_BatchProcess.csv'
 
-analysis_file = 'D:/Vorticella_GravityMachine/active-sinking-particles/TracksUsedForAnalysis/VorticellaGravityMachine/VelocityDistribution_BatchProcess_3.csv'
+analysis_file = 'C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/active-sinking-particles/TracksUsedForAnalysis/VorticellaGravityMachine/VelocityDistribution_BatchProcess_4.csv'
 
 analysis_df = pd.read_csv(analysis_file)
 

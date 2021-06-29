@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os, time
 
-batch_file = 'D:/Vorticella_GravityMachine/active-sinking-particles/TracksUsedForAnalysis/VorticellaGravityMachine/VelocityDistribution_BatchProcess.csv'
+batch_file = 'D:/Vorticella_GravityMachine/active-sinking-particles/TracksUsedForAnalysis/VorticellaGravityMachine/VelocityDistribution_BatchProcess_4.csv'
 
 df_batch = pd.read_csv(batch_file)
 
@@ -41,15 +41,7 @@ for ii in range(len(df_batch)):
     
     PixelPermm = df_batch['Pixelpermm'][ii]
     
-    
-
-    
-    print(Tmin)
-    print(Tmax)
-    print(FileName)
-    print(Organism)
-    print(Condition)
-    track = GravityMachineTrack.gravMachineTrack(trackFile = FileName, organism = track_ID, condition = Condition, trackDescription = Description, Tmin = Tmin, Tmax = Tmax, computeDisp = True, overwrite_piv = False, overwrite_velocity = False, findDims = True, localTime = LocalTime, flip_z = False, pixelPermm = 1122.67, scaleFactor = 5)
+    track = GravityMachineTrack.gravMachineTrack(trackFile = FileName, organism = track_ID, condition = Condition, Tmin = Tmin, Tmax = Tmax, computeDisp = True, overwrite_piv = False, overwrite_velocity = False, findDims = True, localTime = LocalTime, flip_z = False, pixelPermm = PixelPermm, scaleFactor = 5)
     track.saveAnalysisData(overwrite = True)
 
 #FileList = {}

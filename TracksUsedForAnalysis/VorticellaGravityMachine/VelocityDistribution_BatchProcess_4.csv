@@ -1,0 +1,7 @@
+﻿Organism,Condition,rootFolder,trackFolder,trackFile,Tmin,Tmax,Objective
+Sphere013,1,D:\Vorticella_GravityMachine\2019_08_23,track1,track000.csv,0,0,4x
+Sphere013,1,D:\Vorticella_GravityMachine\2019_08_23,track2,track000.csv,0,0,4x
+Sphere013,1,D:\Vorticella_GravityMachine\2019_08_23,track3,track000.csv,0,0,10x
+Sphere013,1,D:\Vorticella_GravityMachine\2019_08_23,track4,track000.csv,0,0,10x
+Sphere015,1,D:\Vorticella_GravityMachine\2019_08_23,track8,track000.csv,0,0,4x
+Sphere015,1,D:\Vorticella_GravityMachine\2019_08_23,track9,track000.csv,0,0,4x

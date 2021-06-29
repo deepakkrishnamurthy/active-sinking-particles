@@ -103,7 +103,7 @@ out = minimize(stokes_law_residual, params, args = (Diameters, SinkingSpeed_data
 print('Best fit density: {} kg/m^3'.format(out.params['delta_rho'].value))
 
 # Calculate theoretical sinking speed based on best-fit Stokes-law
-Size_array = np.linspace(0.7, 1.6, 20)*1e-3
+Size_array = np.linspace(0.7, 2.0, 20)*1e-3
 
 
 TheoreticalSinkingSpeed = (Size_array**2)*out.params['delta_rho'].value*params['g']/(18*params['mu'])
@@ -124,7 +124,7 @@ for ii in range(len(data)):
     
     print(Organism)
     print(Condition)
-    plt.errorbar(1000*data['OrgSize_mean'][ii], 1000*data['v_Z'][ii], xerr = 1000*data['OrgSize_std'][ii], yerr = 1000*data['sigma_v_Z'][ii], color = ColorStyle[Condition], marker = MarkerStyle[Condition], MarkerSize = 20, label = Condition, capsize = 5, linewidth=2, elinewidth=2, alpha=0.95, markeredgecolor = 'k')
+    plt.errorbar(1000*data['OrgSize_mean'][ii], 1000*data['v_Z'][ii], yerr = 1000*data['sigma_v_Z'][ii], color = ColorStyle[Condition], marker = MarkerStyle[Condition], MarkerSize = 20, label = Condition, capsize = 5, linewidth=2, elinewidth=2, alpha=0.95, markeredgecolor = 'k')
     plt.annotate(Organism,(1000*data['OrgSize_mean'][ii],1000*data['v_Z'][ii]), textcoords="offset points", xytext=(20,20), ha='center', fontsize=12)
 
 plt.plot(1e6*Size_array, 1e6*TheoreticalSinkingSpeed, 'k-', linestyle='--')
@@ -134,12 +134,12 @@ plt.title(title)
     
 from collections import OrderedDict
 
-handles, labels = plt.gca().get_legend_handles_labels()
+handles, labels = plt.gca().get_legend_handles_labels()-
 by_label = OrderedDict(zip(labels, handles))
 plt.legend(by_label.values(), by_label.keys())
 #plt.legend(loc=2,prop={'size': 30})
-plt.savefig(os.path.join(figures_folder, title+'_StokesLawFit.png'), dpi =300)
-plt.savefig(os.path.join(figures_folder, title+'_StokesLawFit.svg'), dpi =300)
+#plt.savefig(os.path.join(figures_folder, title+'_StokesLawFit.png'), dpi =300)
+#plt.savefig(os.path.join(figures_folder, title+'_StokesLawFit.svg'), dpi =300)
 
 
 plt.show()
@@ -152,7 +152,8 @@ plt.show()
 #
 #for ii in range(len(data)):
 #    print(ii)
-#    Organism = data['Organism'][ii]
+#    Organism =
+ data['Organism'][ii]
 #    Condition = data['Condition'][ii]
 #    
 #    
