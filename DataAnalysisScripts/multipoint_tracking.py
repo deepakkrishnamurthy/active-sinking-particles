@@ -136,16 +136,26 @@ T_end = 95
 save_folder = sphere + '_'+ 'RotationAnalysisTracks'
 
 # Tests: Using artificially generated test-images for testing the method
-TEST = False
+TEST = True
 overwrite =  True
-save = False
+save = True
 save_image = False
 
 
 
 if(TEST == True):
-    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images_2020-12-08 01-32'
+#    test_images_folder ='C:/Users/Deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/test_images_2020-12-08 01-32'
+#    root_folder = '/Users/deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/FinalValidation/test_images_p_1.0_0.0_0.0_omega_0.0255'
+    
+#    root_folder = '/Users/deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/FinalValidation/test_images_p_0.7_0.7_0.0_omega_0.0255'
+    root_folder = '/Users/deepak/Dropbox/ActiveMassTransport_Vorticella_SinkingAggregates/RotationalAnalysis/FinalValidation/test_images_p_1.0_1.0_1.0_omega_0.0255'
+    images_folder = 'images'
+    test_images_folder = os.path.join(root_folder, images_folder)
+    
     image_files = [file_name for file_name in os.listdir(test_images_folder) if file_name.endswith('.tif')]
+    
+    image_files.sort()
+    
     print(image_files)
     
     nFrames = len(image_files)
@@ -185,7 +195,9 @@ else:
 
         
 if(TEST == True):
-    save_path = os.path.join(test_images_folder, save_folder)
+    save_folder = 'FeatureTracks'
+
+    save_path = os.path.join(root_folder, save_folder)
 else:
     save_path = os.path.join(path, sphere + '_' + save_folder)
 
@@ -405,29 +417,29 @@ plt.show()
     
     
 # Overlay centroid locations and velocities on the image and save the overlaid images
-plt.figure()
-comet_tail_length = 50
-for ii, index in enumerate(image_index_subsampled):
-    image_name = track.df['Image name'][index]
-    TimeStamp = track.df['Time'][index]
-    
-    
-    image = cv2.imread(os.path.join(track.path, track.image_dict[image_name], image_name),0)
-    image = clahe.apply(image)
-    
-    plt.cla()
-    plt.imshow(image, cmap = 'gray')
-    start_index = max(0, ii - comet_tail_length)
-    for track_id in track_ids:
-        
-        
-        x_centroids, y_centroids = centroids_x_array[track_id][start_index:ii], centroids_y_array[track_id][start_index:ii]
-        
-        plt.scatter(x_centroids, y_centroids, 20, color ='y', marker = 'o')
-
-            
-    plt.show()
-    plt.pause(0.001)
+#plt.figure()
+#comet_tail_length = 50
+#for ii, index in enumerate(image_index_subsampled):
+#    image_name = track.df['Image name'][index]
+#    TimeStamp = track.df['Time'][index]
+#    
+#    
+#    image = cv2.imread(os.path.join(track.path, track.image_dict[image_name], image_name),0)
+#    image = clahe.apply(image)
+#    
+#    plt.cla()
+#    plt.imshow(image, cmap = 'gray')
+#    start_index = max(0, ii - comet_tail_length)
+#    for track_id in track_ids:
+#        
+#        
+#        x_centroids, y_centroids = centroids_x_array[track_id][start_index:ii], centroids_y_array[track_id][start_index:ii]
+#        
+#        plt.scatter(x_centroids, y_centroids, 20, color ='y', marker = 'o')
+#
+#            
+#    plt.show()
+#    plt.pause(0.001)
             
         
         
