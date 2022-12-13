@@ -1,0 +1,23 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Active Sinking Particles
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: 'Deepak '
+    family-names: Krishnamurthy
+    email: deepak90@berkeley.edu
+    affiliation: 'University of California, Berkeley'
+    orcid: 'https://orcid.org/0000-0002-4504-1530'
+  - given-names: Rachel
+    family-names: Pepper
+    email: rpepper@pugetsound.edu
+    affiliation: University of Puget Sound
+  - given-names: Manu
+    family-names: Prakash
+    email: manup@stanford.edu
+    affiliation: Stanford University
