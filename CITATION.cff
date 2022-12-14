@@ -21,3 +21,17 @@ authors:
     family-names: Prakash
     email: manup@stanford.edu
     affiliation: Stanford University
+identifiers:
+  - type: url
+    value: >-
+      https://github.com/deepakkrishnamurthy/active-sinking-particles.git
+    description: GitHub Repository
+repository-code: >-
+  https://github.com/deepakkrishnamurthy/active-sinking-particles.git
+keywords:
+  - sinking aggregates
+  - ocean carbon sequestration
+  - biological fluid dynamics
+  - mass transport
+  - tracking microscopy
+
